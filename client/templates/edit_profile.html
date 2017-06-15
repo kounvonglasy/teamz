@@ -1,0 +1,22 @@
+<ion-view title="Edit my Profile">
+    <ion-content>
+        <div class="list list-inset" style="margin-top: 10px;">
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Name</span>
+                <input type="text" placeholder="Username" ng-model="user.name" />
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Email</span>
+                <input type="text" placeholder="Enter your name" ng-model="user.email" />
+            </label>
+            <input type="hidden" ng-model="user.token" />
+            <div class="buttons right-buttons">
+                <button class="button button-block button-positive" ng-click="editProfile()">Update</button>
+                <a class="button button-block button-stable button-light-border" ui-sref="changePassword">
+                    Change Password<i class="icon-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>

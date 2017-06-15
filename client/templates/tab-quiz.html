@@ -1,0 +1,66 @@
+<ion-view title="Live Quiz">
+    <ion-nav-buttons side="left">
+        <button class="button button-clear" ng-click="leaveRoom()">Leave the game</button>
+    </ion-nav-buttons>
+    <ion-content class="padding">
+        <div class="col-md-9">
+            <div ng-show="!theEnd()">
+                <h1>Thanks for playing!</h1>
+            </div>
+
+            <div  ng-show="q.question == 'start'">
+                <h2>The Quiz is about to start!</h2>
+                <h4>Any correct earns 5 points!</h4>
+            </div>
+            <div ng-show="q.question != 'start' && !theEnd()">
+                <div class="item item-text-wrap">
+                    <h3>{{q.question}}</h3>
+                </div>
+
+                <div class="" ng-if="!hasAnswered()">
+                    <div class="list">
+                        <a class="item item-icon-left" ng-repeat="choice in q.answers" ng-value="$index" ng-click="saveChoice($index)">
+                            <h2>{{ choice}}</h2>
+                        </a>
+                    </div>
+                    <div class="list">
+                        <div class="item item-icon-left">
+                            <h2>Hint {{user.index}}: {{q.hints[user.index - 1]}}</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="" ng-if="hasAnswered()">
+                    <div class="list">
+                        <a class="item item-icon-left" ng-repeat="choice in q.answers">
+                            <i class="icon ion-checkmark balanced" ng-show="isCorrectAnswer($index)"></i>
+                            <h2 ng-class='{"balanced": userAnswerCorrect($index), "assertive": userAnswerWrong($index)}'>{{ choice}}</h2>
+                        </a>
+                    </div>
+                    <div class="list">
+                        <div class="item item-icon-left">
+                            <h2>Hint {{user.index}}: {{q.hints[user.index - 1]}}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+        <div class="col-md-3" style="text-align: center">
+            <h5 ng-show="mode == 'chrono'">Timer:  {{counter}} </h5>
+            <h5>Game Id: {{ gameId}}</h5>
+            <div ng-show="roomMsg">
+                <h5 class="energized">{{roomMsg}}</h5>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div ng-show="show_leaders">
+                <br>
+                <div class="list">
+                    <div class="item item-divider">Leaderboard</div>
+                    <div class="item" ng-repeat="user in leaders">{{user.points}}pts - {{user.name}}</div>
+                </div>
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>
